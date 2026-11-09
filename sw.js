@@ -1,5 +1,5 @@
 /* PAWGRAM service worker — offline-first for art & pages, network-first for HTML */
-const VER = 'pawgram-v9';
+const VER = 'pawgram-v10';
 /* precache only what the first visit needs — art/pages fill the cache on demand */
 const CORE = [
   './', './index.html', './gallery.html', './chapters.html', './characters.html', './pawfun.html',

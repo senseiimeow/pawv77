@@ -439,7 +439,10 @@
     'archivist':    { icon: '🏆', title: 'Thread Archivist', sub: 'a perfect quiz score' },
     'seasonal':     { icon: '🌸', title: 'Season Changer',   sub: 'you dragged Sept → April' },
     'explorer':     { icon: '🐾', title: 'Sticker Maker',    sub: 'you threw every motif sticker' },
-    'streak':       { icon: '🔥', title: 'Streak Builder',   sub: 'five right taps in a row' }
+    'streak':       { icon: '🔥', title: 'Streak Builder',   sub: 'five right taps in a row' },
+    'paw-fav':      { icon: '🏮', title: 'Cabinet Full',     sub: '13 frames of the show' },
+    'hanabi':       { icon: '🎆', title: 'Word You Know',    sub: 'you typed hanabi' },
+    'monogatari':   { icon: '🎇', title: 'Waited for the Finale', sub: 'you stayed through Act X' }
   };
   PG.unlock = function (id) {
     var got = store.getJSON('pg-badges', []);
