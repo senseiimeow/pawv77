@@ -1,0 +1,89 @@
+/* =========================================================
+   PAWGRAM v3 · READER LAYER (inlined into each chapter file)
+   Additive only — it never changes the page art or the layout
+   of the manhwa pages themselves.
+   ========================================================= */
+
+/* coral-thread progress + paw handle */
+#rp{
+  background:linear-gradient(90deg,#ff5f7e,#ffb25e,#ffd166,#7ef0d0,#b9a7ff)!important;
+  background-size:300% 100%!important;animation:rpSlide 6s linear infinite;
+  box-shadow:0 0 18px rgba(255,120,140,.85)!important;height:3px!important;
+}
+@keyframes rpSlide{to{background-position:300% 0}}
+#rpPaw{
+  position:fixed;top:1.5px;left:0;z-index:61;width:22px;height:22px;border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,#fff,#ffd9e2 60%,#ffb7c5);
+  box-shadow:0 6px 14px -4px rgba(0,0,0,.7),0 0 0 2px rgba(255,255,255,.4);
+  pointer-events:none;transition:left .06s linear;
+}
+#rpPaw::after{
+  content:"🐾";position:absolute;inset:0;display:grid;place-items:center;font-size:11px;
+}
+
+/* extra chrome buttons in the top bar */
+.uibtn{
+  width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.04);color:var(--cream);display:inline-grid;place-items:center;
+  font-size:15px;transition:.3s;flex:none;
+}
+.uibtn:hover{border-color:rgba(255,178,94,.7);color:#fff;transform:translateY(-1px)}
+.topbar.faded{opacity:0;transform:translateY(-100%);pointer-events:none}
+.topbar{transition:opacity .35s ease,transform .4s cubic-bezier(.19,1,.22,1)}
+
+/* "continue where you left off" */
+.resume{
+  position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));z-index:62;
+  transform:translate(-50%,140%);display:flex;align-items:center;gap:8px;padding:8px 8px 8px 15px;
+  border-radius:999px;background:rgba(23,17,32,.94);border:1px solid rgba(255,255,255,.18);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11.5px;letter-spacing:.06em;
+  color:#f8eee4;box-shadow:0 20px 40px -22px #000;
+  transition:transform .55s cubic-bezier(.34,1.56,.64,1),opacity .4s;opacity:0;max-width:calc(100% - 24px);
+}
+.resume.on{transform:translate(-50%,0);opacity:1}
+.resume .rb{border-radius:999px;padding:7px 13px;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;border:1px solid rgba(255,255,255,.2);color:#fff;flex:none}
+.resume .rb.go{background:linear-gradient(100deg,#ff5f7e,#ffb25e);color:#2a0d14;border:0;font-weight:700}
+.resume .rb.x{border:0;opacity:.6;padding:6px 8px}
+
+/* panel entrance — opacity only, never touches layout */
+figure.pg.pg-anim{opacity:.001;transform:translateY(14px);
+  transition:opacity .75s cubic-bezier(.19,1,.22,1),transform .8s cubic-bezier(.19,1,.22,1)}
+figure.pg.pg-anim.seen{opacity:1;transform:none}
+
+/* reactions at the end */
+.rreact{margin-top:22px;display:grid;gap:10px;justify-items:center}
+.rr-label{font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:#7a6f8c}
+.rr-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.rr-row button{
+  min-width:52px;padding:10px 14px;border-radius:999px;font-size:15px;
+  border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#fff;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),background .3s;
+}
+.rr-row button:hover{transform:translateY(-3px) scale(1.06);background:rgba(255,255,255,.14)}
+.rr-row button.picked{background:#ffb7c5;color:#2a0d14;border-color:transparent}
+
+/* floating emoji (reactions) */
+.emoji-float{position:fixed;z-index:99;font-size:24px;pointer-events:none;
+  animation:emojiUp2 1.5s cubic-bezier(.19,1,.22,1) forwards}
+@keyframes emojiUp2{
+  0%{opacity:0;transform:translateY(0) scale(.6)}
+  20%{opacity:1;transform:translateY(-18px) scale(1.15)}
+  100%{opacity:0;transform:translateY(-110px) scale(.9) rotate(14deg)}
+}
+
+/* day reading mode */
+html[data-theme="day"] body{background:#fdf4ec!important;color:#2c1626}
+html[data-theme="day"] figure.pg{box-shadow:0 18px 40px -30px rgba(120,60,80,.5),0 0 0 1px rgba(120,60,80,.12)}
+html[data-theme="day"] .topbar{background:rgba(255,248,242,.9)!important;border-bottom-color:rgba(140,47,57,.14)}
+html[data-theme="day"] .brand,html[data-theme="day"] .tinfo{color:#2c1626!important}
+html[data-theme="day"] h1,html[data-theme="day"] .endcard h3{color:#2c1626}
+html[data-theme="day"] .endcard p{color:#6b4a5c}
+html[data-theme="day"] .uibtn,html[data-theme="day"] .tbtn{color:#2c1626!important;
+  border-color:rgba(120,60,80,.28)!important}
+
+@media(prefers-reduced-motion:reduce){
+  figure.pg.pg-anim{opacity:1;transform:none;transition:none}
+  #rp{animation:none}
+}

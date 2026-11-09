@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PAWGRAM — See You Offline</title>
+<meta name="theme-color" content="#07050c">
+<meta name="description" content="PAWGRAM — a full-colour manhwa about two strangers, seven months of messages and one day under the sakura.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="art/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="art/apple-touch-icon.png">
+<style>
+/* =========================================================
+   PAWGRAM · splash / hand-off screen
+   Standalone and self-contained: no external stylesheet, so it
+   can never flash unstyled on a cold PWA launch.
+   ========================================================= */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#07050c;color:#f8eee4;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+#loader{position:fixed;inset:0;display:grid;place-items:center;
+  transition:opacity .6s ease,transform .6s cubic-bezier(.19,1,.22,1)}
+#loader.gone{opacity:0;transform:scale(1.04)}
+.lglow{position:absolute;inset:0;
+  background:radial-gradient(60% 50% at 50% 38%,rgba(255,95,126,.28),transparent 66%),
+             radial-gradient(50% 40% at 78% 78%,rgba(185,167,255,.22),transparent 70%),
+             radial-gradient(40% 35% at 18% 82%,rgba(126,240,208,.14),transparent 70%)}
+.lstage{position:relative;display:grid;justify-items:center;gap:14px;padding:24px;text-align:center}
+.lorbit{position:relative;width:168px;height:168px;display:grid;place-items:center}
+.lring{position:absolute;inset:0;width:168px;height:168px;transform:rotate(-90deg)}
+.lring .bg{fill:none;stroke:rgba(255,255,255,.09);stroke-width:3}
+.lring .fg{fill:none;stroke:url(#lgrad);stroke-width:3.4;stroke-linecap:round;
+  stroke-dasharray:502;stroke-dashoffset:502;filter:drop-shadow(0 0 8px rgba(255,95,126,.8))}
+.lpaw{position:relative;display:grid;place-items:center;width:96px;height:96px;border-radius:50%;
+  background:radial-gradient(circle at 42% 34%,rgba(255,255,255,.14),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.14);animation:bob 2.6s ease-in-out infinite}
+.lpaw svg{width:44px;height:44px;filter:drop-shadow(0 6px 14px rgba(255,95,126,.55))}
+.lpaw2{position:absolute;inset:0;animation:orbit 6s linear infinite;opacity:.85}
+.lpaw2:nth-of-type(2){animation-duration:9s;animation-direction:reverse;opacity:.5}
+.lpaw2 svg{position:absolute;top:-2px;left:calc(50% - 13px);width:26px;height:26px}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.lname{display:flex;gap:2px;font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:.16em}
+.lname span{opacity:0;transform:translateY(12px);animation:ltrIn .6s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes ltrIn{to{opacity:1;transform:none}}
+.lname span:nth-child(odd){color:#ffd9df}
+.lsub{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#8b7f9c}
+.lbar{width:min(320px,72vw);height:4px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
+.lbar i{display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(100deg,#ff5f7e,#ffb25e,#ffd166,#7ef0d0);background-size:200% 100%;
+  animation:hueSlide 4s linear infinite;transition:width .16s linear;
+  box-shadow:0 0 14px rgba(255,120,140,.8)}
+@keyframes hueSlide{to{background-position:200% 0}}
+.lpct{font-size:10.5px;letter-spacing:.3em;color:#b9a7ff;font-variant-numeric:tabular-nums}
+.ltip{position:absolute;bottom:max(20px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;
+  font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#6f6480}
+.lskip{position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;padding:9px 15px;border-radius:99px;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#cbbfd8;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);cursor:pointer}
+.lskip:hover{color:#fff;border-color:rgba(255,178,94,.7)}
+#petals{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+#petals i{position:absolute;top:-8vh;border-radius:60% 40% 55% 45%;background:#ffb7c5;
+  animation:fall linear infinite}
+@keyframes fall{0%{transform:translateY(-10vh) rotate(0)}100%{transform:translateY(115vh) rotate(420deg)}}
+@media(prefers-reduced-motion:reduce){
+  .lpaw,.lpaw2,#petals i,.lbar i{animation:none!important}
+  .lname span{opacity:1;transform:none;animation:none}
+}
+</style>
+</head>
+<body>
+<div id="loader">
+  <div class="lglow"></div>
+  <button class="lskip" id="lskip" type="button">Skip →</button>
+  <div class="lstage">
+    <div class="lorbit">
+      <svg class="lring" viewBox="0 0 168 168" aria-hidden="true">
+        <defs><linearGradient id="lgrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ff5f7e"/><stop offset="0.55" stop-color="#ffb25e"/>
+          <stop offset="1" stop-color="#ffb7c5"/></linearGradient></defs>
+        <circle class="bg" cx="84" cy="84" r="80"/>
+        <circle id="lring" class="fg" cx="84" cy="84" r="80"/>
+      </svg>
+      <span class="lpaw2"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <defs><linearGradient id="pg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5f7e"/><stop offset="1" stop-color="#ffb25e"/></linearGradient></defs>
+        <ellipse cx="12" cy="15.4" rx="5.1" ry="4.1" fill="url(#pg1)"/><ellipse cx="5.6" cy="10.2" rx="2.05" ry="2.6" fill="url(#pg1)"/>
+        <ellipse cx="9.7" cy="6.6" rx="2" ry="2.55" fill="url(#pg1)"/><ellipse cx="14.6" cy="6.6" rx="2" ry="2.55" fill="url(#pg1)"/>
+        <ellipse cx="18.5" cy="10.2" rx="2.05" ry="2.6" fill="url(#pg1)"/></svg></span>
+      <span class="lpaw2"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <defs><linearGradient id="pg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b9a7ff"/><stop offset="1" stop-color="#7ef0d0"/></linearGradient></defs>
+        <ellipse cx="12" cy="15.4" rx="5.1" ry="4.1" fill="url(#pg2)"/><ellipse cx="5.6" cy="10.2" rx="2.05" ry="2.6" fill="url(#pg2)"/>
+        <ellipse cx="9.7" cy="6.6" rx="2" ry="2.55" fill="url(#pg2)"/><ellipse cx="14.6" cy="6.6" rx="2" ry="2.55" fill="url(#pg2)"/>
+        <ellipse cx="18.5" cy="10.2" rx="2.05" ry="2.6" fill="url(#pg2)"/></svg></span>
+      <div class="lpaw"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <defs><linearGradient id="pg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5f7e"/><stop offset="1" stop-color="#ffd166"/></linearGradient></defs>
+        <ellipse cx="12" cy="15.4" rx="5.1" ry="4.1" fill="url(#pg3)"/><ellipse cx="5.6" cy="10.2" rx="2.05" ry="2.6" fill="url(#pg3)"/>
+        <ellipse cx="9.7" cy="6.6" rx="2" ry="2.55" fill="url(#pg3)"/><ellipse cx="14.6" cy="6.6" rx="2" ry="2.55" fill="url(#pg3)"/>
+        <ellipse cx="18.5" cy="10.2" rx="2.05" ry="2.6" fill="url(#pg3)"/></svg></div>
+    </div>
+    <div class="lname">
+      <span style="animation-delay:.10s">P</span><span style="animation-delay:.17s">A</span>
+      <span style="animation-delay:.24s">W</span><span style="animation-delay:.31s">G</span>
+      <span style="animation-delay:.38s">R</span><span style="animation-delay:.45s">A</span>
+      <span style="animation-delay:.52s">M</span>
+    </div>
+    <div class="lsub">See You Offline · Season 1</div>
+    <div class="lbar"><i id="lbar"></i></div>
+    <div class="lpct" id="lpct">0%</div>
+  </div>
+  <div class="ltip">オフラインで会おう · loading the city</div>
+</div>
+<div id="petals" aria-hidden="true"></div>
+<script>
+(function () {
+  var el = document.getElementById('lbar'), pc = document.getElementById('lpct'),
+      ring = document.getElementById('lring'), root = document.getElementById('loader'),
+      done = false, p = 0;
+
+  function go() {
+    if (done) return;
+    done = true;
+    root.classList.add('gone');
+    setTimeout(function () { location.replace('index.html'); }, 560);
+  }
+
+  var t = setInterval(function () {
+    p = Math.min(p + Math.random() * 11 + 4, 100);
+    el.style.width = p + '%';
+    pc.textContent = Math.round(p) + '%';
+    ring.style.strokeDashoffset = 502 - 502 * p / 100;
+    if (p >= 100) { clearInterval(t); setTimeout(go, 240); }
+  }, 110);
+
+  /* never trap anyone here */
+  document.getElementById('lskip').addEventListener('click', go);
+  setTimeout(go, 2600);
+
+  var L = document.getElementById('petals');
+  for (var i = 0; i < 14; i++) {
+    var d = document.createElement('i'), s = 5 + Math.random() * 7;
+    d.style.left = (Math.random() * 100) + 'vw';
+    d.style.width = d.style.height = s + 'px';
+    d.style.opacity = (0.12 + Math.random() * 0.3).toFixed(2);
+    d.style.animationDuration = (11 + Math.random() * 11) + 's';
+    d.style.animationDelay = (-Math.random() * 18) + 's';
+    L.appendChild(d);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "PAWGRAM — See You Offline",
+  "short_name": "PAWGRAM",
+  "description": "A full-color manhwa about two strangers, seven months of messages, and one day under the sakura.",
+  "start_url": "./splash.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07050c",
+  "theme_color": "#0a0710",
+  "lang": "en",
+  "categories": ["books", "entertainment"],
+  "icons": [
+    { "src": "art/icon-120.png", "sizes": "120x120", "type": "image/png" },
+    { "src": "art/icon-152.png", "sizes": "152x152", "type": "image/png" },
+    { "src": "art/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "art/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "art/icon-384.png", "sizes": "384x384", "type": "image/png" },
+    { "src": "art/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "art/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "PawFun arcade", "url": "./pawfun.html" },
+    { "name": "Chapters", "url": "./chapters.html" },
+    { "name": "Read Chapter 1", "url": "./readers/Chapter_1_Reader.html" },
+    { "name": "Cast", "url": "./characters.html" }
+  ]
+}
