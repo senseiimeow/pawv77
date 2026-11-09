@@ -1,0 +1,27 @@
+/* =========================================================
+   PAWGRAM · ART LAYER
+   Story art exposed as --im-* custom properties so any element
+   can paint a page with background-image:var(--im-meet) etc.
+   Paths are relative to this file (assets/css/ → ../art/).
+   Want a fully offline single file? Inline art with tools/inline_art.py
+   ========================================================= */
+:root{
+  --im-call:url("../art/call.webp");
+  --im-cast_pragati:url("../art/cast_pragati.webp");
+  --im-cast_tejas:url("../art/cast_tejas.webp");
+  --im-day01:url("../art/day01.webp");
+  --im-dm:url("../art/dm.webp");
+  --im-ema:url("../art/ema.webp");
+  --im-finale:url("../art/finale.webp");
+  --im-frames27:url("../art/frames27.webp");
+  --im-hachiko:url("../art/hachiko.webp");
+  --im-hero_city:url("../art/hero_city.webp");
+  --im-hi:url("../art/hi.webp");
+  --im-meet:url("../art/meet.webp");
+  --im-mochi:url("../art/mochi.webp");
+  --im-picnic:url("../art/picnic.webp");
+  --im-sky:url("../art/sky.webp");
+  --im-umbrella:url("../art/umbrella.webp");
+  --im-xmas:url("../art/xmas.webp");
+  --im-zine:url("../art/zine.webp");
+}
